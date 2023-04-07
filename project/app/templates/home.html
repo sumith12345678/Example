@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        
+        <form class="example" method="post">
+            {% csrf_token %}
+            <br><br>
+            <input type="text" name="search">
+            <!-- <select name="category">
+                <option value="">-------</option>
+                <option value="FICTION">FICTION</option>
+                <option value="SCIFI">SCIFI</option>
+                <option value="ENGINEERING">ENGINEERING</option>
+            </select> --> 
+            <select name="category">
+                {% for i in book %}
+                
+                    <option value="{{i.category}}">{{i.category}}</option>
+                    {% endfor %}
+                </select>
+               
+            <button type="submit"><i class="fa fa-search">Submit</i></button>
+          </form>
+          <br><br>
+                     <table>
+                        <tr>
+                            <th>Sl No</th>
+                            <th>Book Name</th>
+                            <th>category</th>
+                            <th>price</th>
+                            <th>Author</th>
+                            <th>image</th>
+                            
+                        </tr>
+                        <tr>
+                            {% for val in book %}
+                            <td>{{val.id}}</td>
+                            <td>{{val.Book_name}}</td>
+                            <td>{{val.category}}</td>
+                            <td>{{val.price}}</td>
+                            <td>{{val.Author}}</td> 
+                          
+                            <td><img src="{{val.image.url}}" width="50px" height="50px"></td>
+                            
+                        </tr>
+                       
+                        {% endfor %} 
+
+                    </table> 
+         
+                 <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

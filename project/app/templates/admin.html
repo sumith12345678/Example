@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+        {% csrf_token %}
+
+        <h2><b>My Books</b></h2>
+        <form class="example" action="action_page.php">
+            <br><br>
+          </form>
+
+        
+          <br><br>
+                     <table>
+                        <tr>
+                            <th>Sl No</th>
+                            <th>Book Name</th>
+                            <th>category</th>
+                            <th>price</th>
+                            <th>Author</th>
+                            <th>image</th>
+                            <th>status</th>
+                        </tr>
+                        <tr>
+                            {% for val in book %}
+                            <td>{{val.id}}</td>
+                            <td>{{val.Book_name}}</td>
+                            <td>{{val.category}}</td>
+                            <td>{{val.price}}</td>
+                            <td>{{val.Author}}</td> 
+                          
+                            <td><img src="{{val.image.url}}" width="50px" height="50px"></td>
+                            <td>
+                                <a href="{% url 'change' val.id %}">
+                                {% if val.status == True %}
+                                    Published
+                                {% else %}
+                                    Not Published
+                                {% endif %}
+                                </a>
+                            </td>
+                        </tr>
+                       
+                        {% endfor %} 
+                    </table> 
+         
+                 <a href="{% url 'logout' %}">Logout</a>
+                 <br>
+                 <a href="{% url 'add' %}">Add Books</a>
+</body>
+</html>
